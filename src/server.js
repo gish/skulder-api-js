@@ -5,7 +5,7 @@ var Hapi = require('hapi'),
 
 module.exports = function() {
     server.connection({
-        port: config().port
+        port: process.env.PORT || config().port
     });
 
     routes(server);
