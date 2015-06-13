@@ -1,0 +1,28 @@
+{
+  "name": "skulder-api-js",
+  "version": "1.0.0",
+  "description": "Debt tracking API with Hapi",
+  "main": "index.js",
+  "dependencies": {
+    "good": "^6.1.4",
+    "good-console": "^5.0.2",
+    "hapi": "^8.6.1",
+    "lodash": "^3.9.3",
+    "uuid": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gish/skulder-api-js.git"
+  },
+  "author": "Erik Hedberg <erik@hedberg.at>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gish/skulder-api-js/issues"
+  },
+  "homepage": "https://github.com/gish/skulder-api-js"
+}
