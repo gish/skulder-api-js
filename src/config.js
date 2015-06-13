@@ -4,7 +4,7 @@ var fs = require('fs'),
 
 config = {
     production: {
-        port: 8080,
+        port: 80,
         database: {
             type: 'files',
             path: 'transactions.json'
