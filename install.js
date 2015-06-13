@@ -5,5 +5,6 @@ fs.readFile('transactions.js', function(err, data) {
         JSON.parse(data);
     } catch(e) {
         fs.writeFile('transactions.json', JSON.stringify([]));
+        console.log('Created transactions DB');
     }
 });
