@@ -4,7 +4,11 @@ var fs = require('fs'),
 
 config = {
     production: {
-        port: 80,
+        port: 8080,
+        database: {
+            type: 'files',
+            path: 'transactions.json'
+        }
     },
     development: {
         port: 3000,
@@ -18,6 +22,7 @@ config = {
 
 module.exports = function(environment) {
     if (!!environment) {
+        console.log('Loading config for environment', environment);
         envConfig = config[environment];
     }
 

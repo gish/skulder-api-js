@@ -3,7 +3,7 @@ var server = require('./src/server.js'),
     Transactions = require('./src/transactions.js'),
     environment;
 
-environment = process.argv.DEBT_ENV || 'development';
+environment = process.env.DEBT_ENV || 'development';
 
 config(environment);
 
