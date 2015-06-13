@@ -6,7 +6,7 @@ module.exports = function(server) {
      ***********************/
     server.route({
         method: 'GET',
-        path: '/transactions',
+        path: '/api/v1/transactions',
         handler: function(request, reply) {
             var transactions = Transactions.list();
 
@@ -19,7 +19,7 @@ module.exports = function(server) {
      ***********************/
     server.route({
         method: 'GET',
-        path: '/transactions/{id}',
+        path: '/api/v1/transactions/{id}',
         handler: function(request, reply) {
             var transaction = Transactions.get(request.params.id);
 
@@ -36,7 +36,7 @@ module.exports = function(server) {
      ***********************/
     server.route({
         method: 'POST',
-        path: '/transactions',
+        path: '/api/v1/transactions',
         handler: function(request, reply) {
             var transaction = {
                 sender: parseInt(request.payload.sender, 10),
@@ -55,10 +55,10 @@ module.exports = function(server) {
      ***********************/
     server.route({
         method: 'DELETE',
-        path: '/transactions/{id}',
+        path: '/api/v1/transactions/{id}',
         handler: function(request, reply) {
             var result = Transactions.delete(request.params.id);
-            console.log(request.params.id);
+
             if (!result) {
                 reply().code(404);
             } else {

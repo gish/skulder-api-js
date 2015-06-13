@@ -31,7 +31,6 @@ module.exports = {
         return transaction;
     },
     get: function(id) {
-        console.log(typeof transactions);
         return _.findWhere(transactions, {id: id});
     },
     delete: function(id) {
