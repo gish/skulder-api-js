@@ -1,8 +1,17 @@
 var _ = require('lodash'),
     uuid = require('uuid'),
-    transactions = [];
+    config = require('./config.js'),
+    dbFactory = require('./../src/db/db-factory.js'),
+    transactions,
+    database;
 
 module.exports = {
+    init: function() {
+        database = dbFactory(config().database);
+        database.load(function(data) {
+            transactions = data;
+        });
+    },
     add: function(options) {
         var transaction,
             defaults = {
@@ -17,9 +26,12 @@ module.exports = {
 
         transactions.push(transaction);
 
+        database.save(transactions);
+
         return transaction;
     },
     get: function(id) {
+        console.log(typeof transactions);
         return _.findWhere(transactions, {id: id});
     },
     delete: function(id) {
@@ -28,6 +40,7 @@ module.exports = {
         });
 
         if (index !== -1) {
+            database.save(transactions);
             transactions.splice(index, 1);
             return true;
         }

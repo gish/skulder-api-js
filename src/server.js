@@ -1,10 +1,11 @@
 var Hapi = require('hapi'),
     routes = require('./routes.js'),
-    server = new Hapi.Server();
+    server = new Hapi.Server(),
+    config = require('./config.js');
 
-module.exports = function(config) {
+module.exports = function() {
     server.connection({
-        port: config.port
+        port: config().port
     });
 
     routes(server);

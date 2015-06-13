@@ -1,0 +1,23 @@
+[
+    {
+        "receiver": 1,
+        "sender": 0,
+        "amount": 12800,
+        "id": "e6b48819-81c9-4fc9-83f6-ca5192afef3f",
+        "date": 1434199758082
+    },
+    {
+        "receiver": 0,
+        "sender": 1,
+        "amount": 13700,
+        "id": "f6409bf2-7f43-45d7-ab8d-91e748f39b8b",
+        "date": 1434199758378
+    },
+    {
+        "receiver": 1,
+        "sender": 0,
+        "amount": 12800,
+        "id": "0fea9445-9025-4a14-895f-870fd882351f",
+        "date": 1434199758681
+    }
+]

@@ -1,9 +1,12 @@
 var server = require('./src/server.js'),
     config = require('./src/config.js'),
+    Transactions = require('./src/transactions.js'),
     environment;
 
 environment = process.argv.DEBT_ENV || 'development';
 
-config = config(environment);
+config(environment);
 
-server(config).start();
+Transactions.init();
+
+server().start();
