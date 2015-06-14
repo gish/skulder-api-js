@@ -1,7 +1,7 @@
 var _ = require('lodash'),
     uuid = require('uuid'),
-    config = require('./config.js'),
-    dbFactory = require('./../src/db/db-factory.js'),
+    config = require('./../config.js'),
+    dbFactory = require('./../db/db-factory.js'),
     transactions,
     database;
 

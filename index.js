@@ -1,6 +1,6 @@
-var server = require('./src/server.js'),
-    config = require('./src/config.js'),
-    Transactions = require('./src/transactions.js'),
+var server = require('./server/server.js'),
+    config = require('./server/config.js'),
+    Transactions = require('./server/libs/transactions.js'),
     environment;
 
 environment = process.env.NODE_ENV || 'development';

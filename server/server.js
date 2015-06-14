@@ -1,5 +1,5 @@
 var Hapi = require('hapi'),
-    routes = require('./routes.js'),
+    routes = require('./../server/routes/transactions.js'),
     server = new Hapi.Server(),
     config = require('./config.js');
 
