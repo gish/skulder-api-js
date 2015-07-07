@@ -23,8 +23,8 @@ module.exports = {
             cb(transactions);
         });
     },
-    save: function() {
+    add: function() {
         // Stub
         return true;
-    },
+    }
 };

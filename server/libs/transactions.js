@@ -26,7 +26,7 @@ module.exports = {
 
         transactions.push(transaction);
 
-        database.save(transactions);
+        database.add(transaction);
 
         return transaction;
     },
@@ -39,7 +39,7 @@ module.exports = {
         });
 
         if (index !== -1) {
-            database.save(transactions);
+            database.delete(id);
             transactions.splice(index, 1);
             return true;
         }

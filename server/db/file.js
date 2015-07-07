@@ -1,6 +1,17 @@
 var fs = require('fs'),
+    _ = require('lodash'),
     dbOptions,
-    transactions;
+    transactions,
+    _save;
+
+_save = function() {
+    var transactionData = JSON.stringify(transactions),
+        path = dbOptions.path;
+
+    fs.writeFile(path, transactionData, function(err, data) {
+        console.log('Transaction file saved');
+    });
+};
 
 module.exports = {
     init: function(options) {
@@ -23,12 +34,17 @@ module.exports = {
             cb(transactions);
         });
     },
-    save: function() {
-        var transactionData = JSON.stringify(transactions),
-            path = dbOptions.path;
-
-        fs.writeFile(path, transactionData, function(err, data) {
-            console.log('Transaction file saved');
-        });
+    add: function(transaction) {
+        transactions.push(transaction);
+        this._save();
     },
+    delete: function(id) {
+        var index = _.findIndex(transactions, function(transaction) {
+            return transaction.id === id;
+        });
+
+        if (index !== -1) {
+            transactions.splice(index, 1);
+        }
+    }
 };
