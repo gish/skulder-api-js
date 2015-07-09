@@ -1,5 +1,5 @@
 var connection = require('./server/services/mysql-connector.js'),
-    migrations = require('./server/db/migrations.js'),
+    migrations = require('./server/migrations.js'),
     lastMigration = parseInt(process.env.DB_MIGRATION_LAST, 10) || 0,
     _ = require('lodash');
 
