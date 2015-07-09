@@ -7,6 +7,7 @@ config = {
         port: process.env.PORT || 80,
         database: {
             type: 'mysql',
+            host: process.env.CLEARDB_DATABASE_URL,
             database: process.env.DB_NAME,
             username: process.env.DB_USERNAME,
             password: process.env.DB_PASSWORD

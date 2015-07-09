@@ -2,8 +2,8 @@ var mysql = require('mysql'),
     connection;
 
 connection = mysql.createConnection({
-    host: 'localhost',
-    database: 'transactions',
+    host: process.env.CLEARDB_DATABASE_URL,
+    database: process.env.DB_NAME,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD
 });
