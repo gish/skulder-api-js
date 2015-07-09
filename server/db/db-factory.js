@@ -11,12 +11,7 @@ factory = function(options) {
         return fixtureDb;
     }
 
-    if (options.type === 'files') {
-        filesDb.init(options);
-        return filesDb;
-    }
-
-    if (options.type === 'mysql') {
+   if (options.type === 'mysql') {
         mysqlDb.init(options);
         return mysqlDb;
     }
