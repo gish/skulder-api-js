@@ -1,8 +1,6 @@
 var factory;
 
 factory = function(options) {
-    var db;
-
     if (options.type === 'fixtures') {
         var fixtureDb = require('./fixture.js');
         fixtureDb.init(options);

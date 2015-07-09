@@ -1,5 +1,4 @@
-var fs = require('fs'),
-    config,
+var config,
     envConfig;
 
 config = {

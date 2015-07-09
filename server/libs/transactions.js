@@ -16,7 +16,7 @@ module.exports = {
         var transaction,
             defaults = {
                 id: uuid.v4(),
-                date: Math.floor((new Date()).getTime() / 1E3),
+                date: Math.floor((new Date()).getTime() / 1E3)
             };
         transaction = _.defaults({
             receiver: options.receiver,

@@ -1,5 +1,4 @@
 var mysql = require('./../services/mysql-connector.js'),
-    transactions,
     queryCb;
 
 queryCb = function(cb) {
@@ -16,8 +15,7 @@ queryCb = function(cb) {
 };
 
 module.exports = {
-    init: function(options) {
-    },
+    init: function() {},
     load: function(cb) {
         var query = 'SELECT id, sender, receiver, amount, UNIX_TIMESTAMP(date) as date FROM transactions';
         mysql.query(query, queryCb(cb));
