@@ -4,7 +4,7 @@ var fs = require('fs'),
 
 config = {
     production: {
-        port: 80,
+        port: process.env.PORT || 80,
         database: {
             type: 'mysql',
             database: 'transactions',
