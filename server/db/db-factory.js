@@ -1,17 +1,16 @@
-var fixtureDb = require('./fixture.js'),
-    filesDb = require('./file.js'),
-    mysqlDb = require('./mysql.js'),
-    factory;
+var factory;
 
 factory = function(options) {
     var db;
 
     if (options.type === 'fixtures') {
+        var fixtureDb = require('./fixture.js');
         fixtureDb.init(options);
         return fixtureDb;
     }
 
    if (options.type === 'mysql') {
+        var mysqlDb = require('./mysql.js');
         mysqlDb.init(options);
         return mysqlDb;
     }
