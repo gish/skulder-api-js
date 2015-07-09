@@ -1,23 +1,23 @@
 [
     {
-        "receiver": 1,
-        "sender": 0,
+        "receiver": "3c63d199-e48a-4f41-a84d-8cc2670c20d4",
+        "sender": "1c3389de-0804-42ed-81f7-284b1bfdf174",
         "amount": 12800,
         "id": "e6b48819-81c9-4fc9-83f6-ca5192afef3f",
-        "date": 1434199758082
+        "date": 1434199758
     },
     {
-        "receiver": 0,
-        "sender": 1,
+        "receiver": "1c3389de-0804-42ed-81f7-284b1bfdf174",
+        "sender": "3c63d199-e48a-4f41-a84d-8cc2670c20d4",
         "amount": 13700,
         "id": "f6409bf2-7f43-45d7-ab8d-91e748f39b8b",
-        "date": 1434199758378
+        "date": 1434199758
     },
     {
-        "receiver": 1,
-        "sender": 0,
+        "receiver": "3c63d199-e48a-4f41-a84d-8cc2670c20d4",
+        "sender": "1c3389de-0804-42ed-81f7-284b1bfdf174",
         "amount": 12800,
         "id": "0fea9445-9025-4a14-895f-870fd882351f",
-        "date": 1434199758681
+        "date": 1434199758
     }
 ]

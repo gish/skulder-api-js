@@ -27,8 +27,8 @@ module.exports = {
      ***********************/
     post: function(request, reply) {
         var transaction = {
-            sender: parseInt(request.payload.sender, 10),
-            receiver: parseInt(request.payload.receiver, 10),
+            sender: request.payload.sender,
+            receiver: request.payload.receiver,
             amount: parseInt(request.payload.amount, 10)
         };
 

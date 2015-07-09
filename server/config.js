@@ -4,10 +4,12 @@ var fs = require('fs'),
 
 config = {
     production: {
-        port: 80,
+        port: process.env.PORT || 80,
         database: {
-            type: 'files',
-            path: 'transactions.json'
+            type: 'mysql',
+            database: 'transactions',
+            username: process.env.DB_USERNAME,
+            password: process.env.DB_PASSWORD
         }
     },
     development: {
