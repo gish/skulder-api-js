@@ -1,5 +1,6 @@
 var fixtureDb = require('./fixture.js'),
     filesDb = require('./file.js'),
+    mysqlDb = require('./mysql.js'),
     factory;
 
 factory = function(options) {
@@ -13,6 +14,11 @@ factory = function(options) {
     if (options.type === 'files') {
         filesDb.init(options);
         return filesDb;
+    }
+
+    if (options.type === 'mysql') {
+        mysqlDb.init(options);
+        return mysqlDb;
     }
 };
 
