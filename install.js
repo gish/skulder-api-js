@@ -1,10 +1,21 @@
-var fs = require('fs');
+var connection = require('./server/services/mysql-connector.js'),
+    migrations = require('./server/db/migrations.js'),
+    lastMigration = parseInt(process.env.DB_MIGRATION_LAST, 10) || 0,
+    _ = require('lodash');
 
-fs.readFile('transactions.js', function(err, data) {
-    try {
-        JSON.parse(data);
-    } catch(e) {
-        fs.writeFile('transactions.json', JSON.stringify([]));
-        console.log('Created transactions DB');
+_.map(migrations, function(migration) {
+    if (migration.timestamp > lastMigration) {
+        console.log("Running migration: ", migration.description);
+        connection.query(migration.statement, function(err, results) {
+            if (err) {
+                console.error('Migration failed', err);
+            } else {
+                lastMigration = migration.timestamp;
+            }
+        });
     }
 });
+
+process.env.DB_MIGRATION_LAST = lastMigration;
+
+connection.end();
