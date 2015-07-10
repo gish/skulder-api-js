@@ -22,7 +22,8 @@ module.exports = {
         transaction = _.defaults({
             receiver: options.receiver,
             sender: options.sender,
-            amount: options.amount
+            amount: options.amount,
+            description: options.description
         }, defaults);
 
         transactions.push(transaction);
@@ -64,6 +65,9 @@ module.exports = {
                 presence: true
             },
             receiver: {
+                presence: true
+            },
+            description: {
                 presence: true
             }
         };
