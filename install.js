@@ -1,29 +1,93 @@
 var migrations = require('./server/migrations.js'),
-    lastMigration = parseInt(process.env.DB_MIGRATION_LAST, 10) || 0,
     _ = require('lodash'),
     config = require('./server/config.js'),
-    connection,
-    environment;
+    mysql,
+    environment,
+    migrator,
+    installer;
 
 
 environment = process.env.NODE_ENV || 'development';
 config(environment);
 
-connection = require('./server/services/mysql-connector.js');
+mysql = require('./server/services/mysql-connector.js');
 
-_.map(migrations, function(migration) {
-    if (migration.timestamp > lastMigration) {
+migrator = {
+    getLastMigrationTimestamp: function(cb) {
+        var query = "SELECT timestamp FROM migrations";
+        mysql.query(query, function(err, data) {
+            if (err) {
+                throw new Error('Failed retrieving last migration timestamp');
+            }
+            cb(data[0].timestamp);
+        });
+    },
+    runMigration: function(migration, cb) {
         console.log("Running migration: ", migration.description);
-        connection.query(migration.statement, function(err, results) {
+        mysql.query(migration.statement, function(err, results) {
             if (err) {
                 throw new Error('Migration ' + migration.description + ' failed');
+            }
+            cb(err, results);
+        });
+    },
+    updateMigrationTimestamp: function(timestamp, cb) {
+        var query = "UPDATE migrations SET timestamp = ?";
+        mysql.query(query, [timestamp], function(err, data) {
+            if (err) {
+                throw new Error("Couldn't update migration timestamp", err);
+            }
+            cb(err, data);
+        });
+    },
+    migrationsToRun: function(migrations, lastMigrationTimestamp) {
+        return _.reduce(migrations, function(migrationsAcc, migration) {
+            if (migration.timestamp > lastMigrationTimestamp) {
+                migrationsAcc.push(migration);
+            }
+
+            return migrationsAcc;
+
+        }, []);
+    },
+    runMigrations: function(migrations, lastMigrationTimestamp, endCb) {
+        var migrationToRun;
+
+        if (migrations.length === 0) {
+            endCb(lastMigrationTimestamp);
+            return;
+        }
+
+        migrationToRun = migrations[0];
+
+        migrator.runMigration(migrationToRun, function(err, data) {
+            if (!err) {
+                lastMigrationTimestamp = migrationToRun.timestamp;
+                migrator.runMigrations(migrations.slice(1), lastMigrationTimestamp, endCb);
             } else {
-                lastMigration = migration.timestamp;
+                endCb(lastMigrationTimestamp);
             }
         });
+    },
+    run: function() {
+        migrator.getLastMigrationTimestamp(function(lastMigrationTimestamp) {
+            migrator.runMigrations(migrator.migrationsToRun(migrations, lastMigrationTimestamp), lastMigrationTimestamp, function(lastMigrationTimestamp) {
+                migrator.updateMigrationTimestamp(lastMigrationTimestamp, function() {
+                    mysql.end();
+                });
+            });
+        });
     }
-});
+};
 
-process.env.DB_MIGRATION_LAST = lastMigration;
+installer = {
+    run: function() {
+        migrator.run();
+    }
+};
 
-connection.end();
+installer.run();
+
+
+
+
