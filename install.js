@@ -60,7 +60,7 @@ migrator = {
 
         migrationToRun = migrations[0];
 
-        migrator.runMigration(migrationToRun, function(err, data) {
+        migrator.runMigration(migrationToRun, function(err) {
             if (!err) {
                 lastMigrationTimestamp = migrationToRun.timestamp;
                 migrator.runMigrations(migrations.slice(1), lastMigrationTimestamp, endCb);
@@ -71,7 +71,8 @@ migrator = {
     },
     run: function() {
         migrator.getLastMigrationTimestamp(function(lastMigrationTimestamp) {
-            migrator.runMigrations(migrator.migrationsToRun(migrations, lastMigrationTimestamp), lastMigrationTimestamp, function(lastMigrationTimestamp) {
+            var migrationsToRun = migrator.migrationsToRun(migrations, lastMigrationTimestamp);
+            migrator.runMigrations(migrationsToRun, lastMigrationTimestamp, function(lastMigrationTimestamp) {
                 migrator.updateMigrationTimestamp(lastMigrationTimestamp, function() {
                     mysql.end();
                 });
