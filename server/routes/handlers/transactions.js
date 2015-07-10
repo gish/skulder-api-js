@@ -29,7 +29,8 @@ module.exports = {
         var transaction = {
             sender: request.payload.sender,
             receiver: request.payload.receiver,
-            amount: parseInt(request.payload.amount, 10)
+            amount: parseInt(request.payload.amount, 10),
+            description: request.payload.description
         };
 
         try {
