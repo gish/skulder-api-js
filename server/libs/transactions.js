@@ -52,8 +52,8 @@ module.exports = {
         return transactions;
     },
     validate: function(data) {
-        var isDataInvalid;
-        var constraints = {
+        var isDataInvalid,
+            constraints = {
             amount: {
                 presence: true,
                 numericality: {
