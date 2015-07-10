@@ -15,7 +15,7 @@ mysql = require('./server/services/mysql-connector.js');
 migrator = {
     getLastMigrationTimestamp: function(cb) {
         var query = "SELECT timestamp FROM migrations";
-        mysql.query(query, function(err, data) {
+        mysql().query(query, function(err, data) {
             if (err) {
                 throw new Error('Failed retrieving last migration timestamp');
             }
@@ -24,7 +24,7 @@ migrator = {
     },
     runMigration: function(migration, cb) {
         console.log("Running migration: ", migration.description);
-        mysql.query(migration.statement, function(err, results) {
+        mysql().query(migration.statement, function(err, results) {
             if (err) {
                 throw new Error('Migration ' + migration.description + ' failed');
             }
@@ -33,7 +33,7 @@ migrator = {
     },
     updateMigrationTimestamp: function(timestamp, cb) {
         var query = "UPDATE migrations SET timestamp = ?";
-        mysql.query(query, [timestamp], function(err, data) {
+        mysql().query(query, [timestamp], function(err, data) {
             if (err) {
                 throw new Error("Couldn't update migration timestamp", err);
             }
@@ -74,7 +74,7 @@ migrator = {
             var migrationsToRun = migrator.migrationsToRun(migrations, lastMigrationTimestamp);
             migrator.runMigrations(migrationsToRun, lastMigrationTimestamp, function(lastMigrationTimestamp) {
                 migrator.updateMigrationTimestamp(lastMigrationTimestamp, function() {
-                    mysql.end();
+                    mysql().end();
                 });
             });
         });
