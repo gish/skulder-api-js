@@ -1,5 +1,6 @@
 var _ = require('lodash'),
     uuid = require('uuid'),
+    validate = require('validate.js'),
     config = require('./../config.js'),
     dbFactory = require('./../db/db-factory.js'),
     transactions,
@@ -48,5 +49,30 @@ module.exports = {
     },
     list: function() {
         return transactions;
+    },
+    validate: function(data) {
+        var isDataInvalid;
+        var constraints = {
+            amount: {
+                presence: true,
+                numericality: {
+                    onlyInteger: true,
+                    greaterThan: 0
+                }
+            },
+            sender: {
+                presence: true
+            },
+            receiver: {
+                presence: true
+            }
+        };
+
+        isDataInvalid = validate(data, constraints);
+
+        if (isDataInvalid) {
+            throw new Error(JSON.stringify(isDataInvalid));
+        }
     }
+
 };

@@ -32,9 +32,15 @@ module.exports = {
             amount: parseInt(request.payload.amount, 10)
         };
 
-        transaction = Transactions.add(transaction);
+        try {
+            Transactions.validate(transaction);
+        } catch(e) {
+            reply(e.message).code(400);
+            return;
+        }
 
-        reply(transaction);
+        transaction = Transactions.add(transaction);
+        reply(transaction).code(201);
     },
 
     /***********************
