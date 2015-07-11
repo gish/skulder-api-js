@@ -27,8 +27,7 @@ module.exports = {
         var transaction,
             query,
             defaults = {
-                id: uuid.v4(),
-                date: Math.floor((new Date()).getTime() / 1E3)
+                id: uuid.v4()
             };
         transaction = _.defaults({
             receiver: options.receiver,
@@ -37,13 +36,13 @@ module.exports = {
             description: options.description
         }, defaults);
 
-        query = 'INSERT INTO transactions(id, sender, receiver, amount, date, description) VALUES(?, ?, ?, ?, FROM_UNIXTIME(?), ?)';
-        mysql().query(query, [transaction.id, transaction.sender, transaction.receiver, transaction.amount, transaction.date, transaction.description], queryCb(function() {
+        query = 'INSERT INTO transactions(id, sender, receiver, amount, description) VALUES(?, ?, ?, ?, ?)';
+        mysql().query(query, [transaction.id, transaction.sender, transaction.receiver, transaction.amount, transaction.description], queryCb(function() {
             return cb(transaction);
         }));
     },
     get: function(id, cb) {
-        var query = 'SELECT id, sender, receiver, amount, date, description FROM transactions WHERE id = ?';
+        var query = 'SELECT id, sender, receiver, amount, UNIX_TIMESTAMP(created_at) as created_at, description FROM transactions WHERE id = ?';
         mysql().query(query, [id], queryCb(cb));
     },
     delete: function(id, cb) {
@@ -53,7 +52,7 @@ module.exports = {
         }));
     },
     list: function(cb) {
-        var query = 'SELECT id, sender, receiver, amount, date, description FROM transactions';
+        var query = 'SELECT id, sender, receiver, amount, UNIX_TIMESTAMP(created_at) as created_at, description FROM transactions';
         mysql().query(query, queryCb(cb));
     },
     validate: function(data) {
