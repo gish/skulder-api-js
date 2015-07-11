@@ -5,21 +5,22 @@ module.exports = {
      * GET transactions
      ***********************/
     list: function(request, reply) {
-        var transactions = Transactions.list();
-        reply(transactions);
+        Transactions.list(function(transactions) {
+            reply(transactions);
+        });
     },
 
     /***********************
      * GET transaction
      ***********************/
     get: function(request, reply) {
-        var transaction = Transactions.get(request.params.id);
-
-        if (!transaction) {
-            reply().code(404);
-        } else {
-            reply(transaction);
-        }
+        Transactions.get(request.params.id, function(transaction) {
+            if (!transaction) {
+                reply().code(404);
+            } else {
+                reply(transaction);
+            }
+        });
     },
 
     /***********************
@@ -40,21 +41,22 @@ module.exports = {
             return;
         }
 
-        transaction = Transactions.add(transaction);
-        reply(transaction).code(201);
+        transaction = Transactions.add(transaction, function(transaction) {
+            reply(transaction).code(201);
+        });
     },
 
     /***********************
      * DELETE transaction
      ***********************/
     delete: function(request, reply) {
-        var result = Transactions.delete(request.params.id);
-
-        if (!result) {
-            reply().code(404);
-        } else {
-            reply();
-        }
+        Transactions.delete(request.params.id, function(deleted) {
+            if (deleted) {
+                reply();
+            } else {
+                reply().code(404);
+            }
+        });
     }
 };
 
