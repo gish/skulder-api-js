@@ -34,4 +34,13 @@ module.exports = {
             }
         });
     },
+
+    /***********************
+     * GET users
+     ***********************/
+    getTransactions: function(request, reply) {
+        Users.getTransactions(request.params.id, function(transactions) {
+            reply(transactions);
+        });
+    }
 };

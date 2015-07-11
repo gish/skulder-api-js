@@ -11,6 +11,15 @@ module.exports = function(server) {
     });
 
     /***********************
+     * GET user transactions
+     ***********************/
+    server.route({
+        method: 'GET',
+        path: '/api/v1/users/{id}/transactions',
+        handler: handlers.getTransactions
+    });
+
+    /***********************
      * POST user
      ***********************/
     server.route({

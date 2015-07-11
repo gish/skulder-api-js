@@ -27,6 +27,10 @@ module.exports = {
         var query = 'SELECT id, name, email FROM users WHERE id = ?';
         mysql().query(query, [id], queryCb(cb));
     },
+    getTransactions: function(id, cb) {
+        var query = 'SELECT id, sender, receiver, amount, UNIX_TIMESTAMP(date) as date, description FROM transactions WHERE sender = ? OR receiver = ?';
+        mysql().query(query, [id, id], queryCb(cb));
+    },
     add: function(data, cb) {
         var user,
             query,
