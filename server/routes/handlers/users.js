@@ -1,4 +1,4 @@
-var Users = require('./../../libs/users.js');
+var Users = require('./../../models/users.js');
 
 module.exports = {
     /***********************

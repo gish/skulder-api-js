@@ -1,4 +1,4 @@
-var Transactions = require('./../../libs/transactions.js');
+var Transactions = require('./../../models/transactions.js');
 
 module.exports = {
     /***********************
