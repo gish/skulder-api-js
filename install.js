@@ -26,7 +26,7 @@ migrator = {
         console.log("Running migration: ", migration.description);
         mysql().query(migration.statement, function(err, results) {
             if (err) {
-                throw new Error('Migration ' + migration.description + ' failed');
+                throw new Error('Migration ' + migration.description + ' failed: ' + err.message);
             }
             cb(err, results);
         });

@@ -15,7 +15,9 @@ queryCb = function(cb) {
 };
 
 module.exports = {
-    init: function() {},
+    init: function() {
+        return mysql;
+    },
     load: function(cb) {
         var query = 'SELECT id, sender, receiver, amount, UNIX_TIMESTAMP(date) as date, description FROM transactions';
         mysql().query(query, queryCb(cb));
