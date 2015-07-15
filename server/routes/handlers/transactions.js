@@ -41,8 +41,8 @@ module.exports = {
             return;
         }
 
-        transaction = Transactions.add(transaction, function(transaction) {
-            reply(transaction).code(201);
+        Transactions.add(transaction, function(transaction) {
+            reply(transaction).code(201).header('location','/api/v1/transactions/' + transaction.id);
         });
     },
 
