@@ -1,5 +1,8 @@
 var Hapi = require('hapi'),
-    routes = require('./../server/routes/transactions.js'),
+    transactionRoutes = require('./../server/routes/transactions.js'),
+    userRoutes = require('./../server/routes/users.js'),
+    Transactions = require('./models/transactions.js'),
+    Users = require('./models/users.js'),
     server = new Hapi.Server(),
     config = require('./config.js');
 
@@ -8,7 +11,11 @@ module.exports = function() {
         port: process.env.PORT || config().port
     });
 
-    routes(server);
+    Transactions.init();
+    Users.init();
+
+    transactionRoutes(server);
+    userRoutes(server);
 
     return {
         start: function() {

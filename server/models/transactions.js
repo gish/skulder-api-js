@@ -3,21 +3,31 @@ var _ = require('lodash'),
     validate = require('validate.js'),
     config = require('./../config.js'),
     dbFactory = require('./../db/db-factory.js'),
-    transactions,
-    database;
+    queryCb,
+    mysql;
+
+queryCb = function(cb) {
+    return function(err, data) {
+        if (err) {
+            console.error(err);
+            throw new Error('mySQL error');
+        } else {
+            if (cb) {
+                cb(data);
+            }
+        }
+    };
+};
 
 module.exports = {
     init: function() {
-        database = dbFactory(config().database);
-        database.load(function(data) {
-            transactions = data;
-        });
+        mysql = dbFactory(config().database).init();
     },
-    add: function(options) {
+    add: function(options, cb) {
         var transaction,
+            query,
             defaults = {
-                id: uuid.v4(),
-                date: Math.floor((new Date()).getTime() / 1E3)
+                id: uuid.v4()
             };
         transaction = _.defaults({
             receiver: options.receiver,
@@ -26,30 +36,24 @@ module.exports = {
             description: options.description
         }, defaults);
 
-        transactions.push(transaction);
-
-        database.add(transaction);
-
-        return transaction;
+        query = 'INSERT INTO transactions(id, sender, receiver, amount, description) VALUES(?, ?, ?, ?, ?)';
+        mysql().query(query, [transaction.id, transaction.sender, transaction.receiver, transaction.amount, transaction.description], queryCb(function() {
+            return cb(transaction);
+        }));
     },
-    get: function(id) {
-        return _.findWhere(transactions, {id: id});
+    get: function(id, cb) {
+        var query = 'SELECT id, sender, receiver, amount, UNIX_TIMESTAMP(created_at) as created_at, description FROM transactions WHERE id = ?';
+        mysql().query(query, [id], queryCb(cb));
     },
-    delete: function(id) {
-        var index = _.findIndex(transactions, function(transaction) {
-            return transaction.id === id;
-        });
-
-        if (index !== -1) {
-            database.delete(id);
-            transactions.splice(index, 1);
-            return true;
-        }
-
-        return false;
+    delete: function(id, cb) {
+        var query = 'DELETE FROM transactions WHERE id = ?';
+        mysql().query(query, [id], queryCb(function(result) {
+            cb(result.affectedRows === 1);
+        }));
     },
-    list: function() {
-        return transactions;
+    list: function(cb) {
+        var query = 'SELECT id, sender, receiver, amount, UNIX_TIMESTAMP(created_at) as created_at, description FROM transactions';
+        mysql().query(query, queryCb(cb));
     },
     validate: function(data) {
         var isDataInvalid,

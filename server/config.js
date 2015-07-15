@@ -10,10 +10,10 @@ config = {
         }
     },
     development: {
-        port: 3000,
+        port: process.env.PORT || 3000,
         database: {
-            type: 'fixtures',
-            path: 'support/fixtures.json'
+            type: 'mysql',
+            url: process.env.CLEARDB_DATABASE_URL
         }
     }
 };
