@@ -35,7 +35,7 @@ module.exports = React.createClass({
         return (
             <div>
                 <AddForm users={users} />
-                <TransactionList transactions={this.state.transactions} />
+                <TransactionList transactions={this.state.transactions} users={users} />
             </div>
         );
     }

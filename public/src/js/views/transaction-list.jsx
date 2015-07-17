@@ -9,8 +9,9 @@ module.exports = React.createClass({
     },
 
     render: function() {
-        var transactions = this.props.transactions,
-            self = this,
+        var self = this,
+            users = this.props.users,
+            transactions = this.props.transactions,
             transactionList;
 
         transactions = _.sortBy(transactions, function(t) {
@@ -20,15 +21,19 @@ module.exports = React.createClass({
         transactionList = transactions.map(function(t) {
             var amount = t.amount / 100,
                 description = t.description,
-                receiver = t.receiver,
+                receiverName,
                 id = t.id,
                 onRemove = function() {
                     self.onRemove(id);
                 };
 
+            receiverName = _.find(users, function(user) {
+                return user.id === t.receiver;
+            }).name;
+
             return (
                 <tr key={id}>
-                    <td>{receiver}</td>
+                    <td>{receiverName}</td>
                     <td>{amount}</td>
                     <td>{description}</td>
                     <td><a href="#" onClick={onRemove}>&times;</a></td>
