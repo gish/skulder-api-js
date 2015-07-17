@@ -4,7 +4,8 @@ var Reflux = require('reflux'),
     Actions;
 
 Actions = Reflux.createActions({
-    add: { children: ['completed'] }
+    add: { children: ['completed'] },
+    load: { children: ['completed'] }
 });
 
 Actions.add.listen(function(transaction) {
@@ -12,8 +13,17 @@ Actions.add.listen(function(transaction) {
     superAgent
         .post(url)
         .send(transaction)
-        .end(function(resp) {
-            self.completed();
+        .end(function(err, response) {
+            self.completed(response.body);
+        });
+});
+
+Actions.load.listen(function() {
+    var self = this;
+    superAgent
+        .get(url)
+        .end(function(err, response) {
+            self.completed(response.body);
         });
 });
 

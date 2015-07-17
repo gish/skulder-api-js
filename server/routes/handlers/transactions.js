@@ -42,7 +42,9 @@ module.exports = {
         }
 
         Transactions.add(transaction, function(transaction) {
-            reply(transaction).code(201).header('location','/api/v1/transactions/' + transaction.id);
+            Transactions.get(transaction.id, function(transaction) {
+                reply(transaction[0]).code(201).header('location','/api/v1/transactions/' + transaction.id);
+            });
         });
     },
 
