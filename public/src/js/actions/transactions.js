@@ -5,6 +5,7 @@ var Reflux = require('reflux'),
 
 Actions = Reflux.createActions({
     add: { children: ['completed'] },
+    remove: { children: ['completed'] },
     load: { children: ['completed'] }
 });
 
@@ -15,6 +16,16 @@ Actions.add.listen(function(transaction) {
         .send(transaction)
         .end(function(err, response) {
             self.completed(response.body);
+        });
+});
+
+Actions.remove.listen(function(id) {
+    var self = this;
+    superAgent
+        .del(url + '/' + id)
+        .send(id)
+        .end(function(err, response) {
+            self.completed({ id: id });
         });
 });
 

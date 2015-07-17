@@ -1,4 +1,5 @@
 var Reflux = require('reflux'),
+    _ = require('lodash'),
     TransactionsActions = require('./../actions/transactions.js'),
     transactions;
 
@@ -7,6 +8,13 @@ module.exports = Reflux.createStore({
 
     onAddCompleted: function(transaction) {
         transactions.push(transaction);
+        this.trigger(transactions);
+    },
+
+    onRemoveCompleted: function(t) {
+        transactions = _.filter(transactions, function(transaction) {
+            return transaction.id !== t.id;
+        });
         this.trigger(transactions);
     },
 

@@ -1,11 +1,16 @@
 var React = require('react'),
     Reflux = require('reflux'),
     _ = require('lodash'),
-    TransactionsStore = require('./../stores/transactions.js');
+    TransactionsActions = require('./../actions/transactions.js');
 
 module.exports = React.createClass({
+    onRemove: function(id) {
+        TransactionsActions.remove(id);
+    },
+
     render: function() {
         var transactions = this.props.transactions,
+            self = this,
             transactionList;
 
         transactions = _.sortBy(transactions, function(t) {
@@ -16,13 +21,17 @@ module.exports = React.createClass({
             var amount = t.amount / 100,
                 description = t.description,
                 receiver = t.receiver,
-                id = t.id;
+                id = t.id,
+                onRemove = function() {
+                    self.onRemove(id);
+                };
 
             return (
                 <tr key={id}>
                     <td>{receiver}</td>
                     <td>{amount}</td>
                     <td>{description}</td>
+                    <td><a href="#" onClick={onRemove}>&times;</a></td>
                 </tr>
             );
         });
