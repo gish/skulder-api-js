@@ -1,6 +1,7 @@
 var React = require('react'),
     Reflux = require('reflux'),
     AddForm = require('./add-form.jsx'),
+    DebtCalculation = require('./debt-calculation.jsx'),
     TransactionList = require('./transaction-list.jsx'),
     TransactionsActions = require('./../actions/transactions.js'),
     TransactionsStore = require('./../stores/transactions.js');
@@ -31,11 +32,14 @@ module.exports = React.createClass({
             },{
                 id: 'aef3b631-5a22-4c21-a7dd-91d9bf965dc1',
                 name: 'Erik'
-            }];
+            }],
+            transactions = this.state.transactions;
+
         return (
             <div>
+                <DebtCalculation users={users} transactions={transactions} />
                 <AddForm users={users} />
-                <TransactionList transactions={this.state.transactions} users={users} />
+                <TransactionList transactions={transactions} users={users} />
             </div>
         );
     }
