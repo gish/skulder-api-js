@@ -34,7 +34,7 @@ module.exports = React.createClass({
             return (
                 <tr key={id}>
                     <td>{receiverName}</td>
-                    <td>{amount}</td>
+                    <td>{amount} kr</td>
                     <td>{description}</td>
                     <td><a href="#" onClick={onRemove}>&times;</a></td>
                 </tr>
