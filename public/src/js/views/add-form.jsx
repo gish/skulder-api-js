@@ -1,5 +1,6 @@
 var React = require('react'),
     Reflux = require('reflux'),
+    _ = require('lodash'),
     TransactionsActions = require('./../actions/transactions.js'),
     TransactionsStore = require('./../stores/transactions.js');
 
@@ -21,14 +22,19 @@ module.exports = React.createClass({
         };
     },
 
-    onSenderChange: function(e) {
-        var sender = e.target.value;
-        this.setState({sender: sender});
-    },
-
     onReceiverChange: function(e) {
-        var receiver = e.target.value;
-        this.setState({receiver: receiver});
+        var receiver = e.target.value,
+            sender;
+
+        // Assume only two users
+        sender = _.reject(this.props.users, function(user) {
+            return user.id === receiver;
+        })[0].id;
+
+        this.setState({
+            sender: sender,
+            receiver: receiver
+        });
     },
 
     onAmountChange: function(e) {
@@ -73,7 +79,6 @@ module.exports = React.createClass({
         return (
             <form method="post" onSubmit={this.onSubmit}>
                 <select onChange={this.onReceiverChange} value={this.state.receiver}>{receiverOptions}</select>
-                <select onChange={this.onSenderChange} value={this.state.sender}>{senderOptions}</select>
                 <input type="text" placeholder="0 kr" value={amount} onChange={this.onAmountChange} />
                 <input type="text" placeholder="En glass" value={description} onChange={this.onDescriptionChange} />
                 <button type="submit">Lägg till</button>
