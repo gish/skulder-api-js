@@ -24,6 +24,12 @@ gulp.task('default', function() {
 gulp.task('copy', function() {
     gulp.src(publicPath + '/**/*.html', {base: publicPath})
         .pipe(gulp.dest(distPath));
+
+    gulp.src('node_modules/bootstrap/dist/css/bootstrap-theme.min.css')
+        .pipe(gulp.dest(distPath + '/css'));
+
+    gulp.src('node_modules/bootstrap/dist/css/bootstrap.min.css')
+        .pipe(gulp.dest(distPath + '/css'));
 });
 
 gulp.task('build', function() {

@@ -4,6 +4,7 @@
   "description": "Debt tracking API with Hapi",
   "main": "index.js",
   "dependencies": {
+    "bootstrap": "^3.3.5",
     "browserify": "^10.2.6",
     "good": "^6.1.4",
     "good-console": "^5.0.2",
