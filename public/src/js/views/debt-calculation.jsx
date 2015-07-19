@@ -46,13 +46,11 @@ module.exports = React.createClass({
             }).name;
             amount = debt.amount / 100;
         } else {
-            return (<div></div>);
+            return (<div>Det är lika!</div>);
         }
 
         return (
-            <div>
-                {userName} är skyldig {amount} kr
-            </div>
+            <div>{userName} är skyldig {amount} kr</div>
         );
     }
 });
