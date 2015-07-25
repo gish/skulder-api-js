@@ -42,8 +42,17 @@ module.exports = React.createClass({
         });
 
         return (
-            <table>
-                {transactionList}
+            <table className="table table-striped table-condensed table-bordered">
+                <thead>
+                    <tr>
+                        <th>Namn</th>
+                        <th>Skuld</th>
+                        <th>Beskrivning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {transactionList}
+                </tbody>
             </table>
         );
     }
