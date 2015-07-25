@@ -86,12 +86,12 @@ module.exports = React.createClass({
         return (
             <form method="post" onSubmit={this.onSubmit}>
                 <h3>Lägg till skuld</h3>
-                <div className="form-group">
+                <div className="form-group form-group-sm">
                     <div>
                         <select className="form-control" onChange={this.onReceiverChange} value={this.state.receiver}>{receiverOptions}</select>
                     </div>
                 </div>
-                <div className="form-group">
+                <div className="form-group form-group-sm">
                     <div>
                         <label>Andel</label>
                         <div className="input-group">
@@ -100,7 +100,7 @@ module.exports = React.createClass({
                         </div>
                     </div>
                 </div>
-                <div className="form-group">
+                <div className="form-group form-group-sm">
                     <div>
                         <label>Skuld</label>
                         <div className="input-group">
@@ -109,7 +109,7 @@ module.exports = React.createClass({
                         </div>
                     </div>
                 </div>
-                <div className="form-group">
+                <div className="form-group form-group-sm">
                     <label>Vad som köptes</label>
                     <input className="form-control" type="text" placeholder="En glass" value={description} onChange={this.onDescriptionChange} />
                 </div>
