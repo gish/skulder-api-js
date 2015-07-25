@@ -19,7 +19,8 @@ module.exports = React.createClass({
             fraction: null,
             sender: (this.props.users[0] && this.props.users[0].id) || null,
             receiver: (this.props.users[1] && this.props.users[1].id) || null,
-            description: null
+            description: null,
+            submitting: false
         };
     },
 
@@ -60,6 +61,7 @@ module.exports = React.createClass({
             description: this.state.description,
             amount: this.state.amount * 100 * (this.state.fraction/100)
         });
+        this.setState({submitting: true});
         e.preventDefault();
     },
 
@@ -70,6 +72,7 @@ module.exports = React.createClass({
             selectedSender = this.state.sender,
             description = this.state.description,
             fraction = this.state.fraction,
+            submitButton,
             senderOptions = senders.map(function(sender) {
                 var id = sender.id,
                     name = sender.name;
@@ -82,6 +85,13 @@ module.exports = React.createClass({
 
                 return (<option value={id} key={id}>{name}</option>);
             });
+
+        if (this.state.submitting) {
+            submitButton = (<button className="btn btn-primary pull-right" disabled="disabled" type="submit">Lägger till</button>);
+        } else {
+            submitButton = (<button className="btn btn-primary pull-right" type="submit">Lägg till</button>);
+        }
+
 
         return (
             <form method="post" onSubmit={this.onSubmit}>
@@ -113,7 +123,7 @@ module.exports = React.createClass({
                     <label>för</label>
                     <input className="form-control" type="text" placeholder="En glass" value={description} onChange={this.onDescriptionChange} />
                 </div>
-                <button className="btn btn-primary pull-right" type="submit">Lägg till</button>
+                {submitButton}
             </form>
         );
     }
