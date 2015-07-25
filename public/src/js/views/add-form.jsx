@@ -84,15 +84,15 @@ module.exports = React.createClass({
             });
 
         return (
-            <form method="post" className="form-horizontal" onSubmit={this.onSubmit}>
+            <form method="post" onSubmit={this.onSubmit}>
                 <div className="form-group">
-                    <div className="col-xs-offset-2 col-xs-10">
+                    <div>
                         <select className="form-control" onChange={this.onReceiverChange} value={this.state.receiver}>{receiverOptions}</select>
                     </div>
                 </div>
                 <div className="form-group">
-                    <label className="col-xs-2">Andel</label>
-                    <div className="col-xs-10">
+                    <div>
+                        <label>Andel</label>
                         <div className="input-group">
                             <input className="form-control" type="text" placeholder="50" value={fraction} onChange={this.onFractionChange} />
                             <span className="input-group-addon"> %</span>
@@ -100,8 +100,8 @@ module.exports = React.createClass({
                     </div>
                 </div>
                 <div className="form-group">
-                    <label className="col-xs-2">Skuld</label>
-                    <div className="col-xs-10">
+                    <div>
+                        <label>Skuld</label>
                         <div className="input-group">
                             <input className="form-control" type="text" placeholder="32" value={amount} onChange={this.onAmountChange} />
                             <span className="input-group-addon"> kr</span>
@@ -109,10 +109,8 @@ module.exports = React.createClass({
                     </div>
                 </div>
                 <div className="form-group">
-                    <label className="col-xs-2">Vad som köptes</label>
-                    <div className="col-xs-10">
-                        <input className="form-control" type="text" placeholder="En glass" value={description} onChange={this.onDescriptionChange} />
-                    </div>
+                    <label>Vad som köptes</label>
+                    <input className="form-control" type="text" placeholder="En glass" value={description} onChange={this.onDescriptionChange} />
                 </div>
                 <button className="btn btn-primary pull-right" type="submit">Lägg till</button>
             </form>
