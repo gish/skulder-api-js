@@ -21,6 +21,10 @@ gulp.task('default', function() {
      });
 });
 
+gulp.task('dist', function() {
+    runSequence('clean', 'build', 'copy');
+});
+
 gulp.task('copy', function() {
     gulp.src(publicPath + '/**/*.html', {base: publicPath})
         .pipe(gulp.dest(distPath));
