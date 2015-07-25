@@ -85,6 +85,7 @@ module.exports = React.createClass({
 
         return (
             <form method="post" onSubmit={this.onSubmit}>
+                <h3>Lägg till skuld</h3>
                 <div className="form-group">
                     <div>
                         <select className="form-control" onChange={this.onReceiverChange} value={this.state.receiver}>{receiverOptions}</select>

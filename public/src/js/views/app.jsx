@@ -37,9 +37,21 @@ module.exports = React.createClass({
 
         return (
             <div className="container">
-                <DebtCalculation users={users} transactions={transactions} />
-                <AddForm users={users} />
-                <TransactionList transactions={transactions} users={users} />
+                <div className="row">
+                    <div className="col-xs-12">
+                        <DebtCalculation users={users} transactions={transactions} />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-12">
+                        <AddForm users={users} />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-12">
+                        <TransactionList transactions={transactions} users={users} />
+                    </div>
+                </div>
             </div>
         );
     }

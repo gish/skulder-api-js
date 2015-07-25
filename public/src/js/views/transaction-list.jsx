@@ -36,24 +36,28 @@ module.exports = React.createClass({
                     <td>{receiverName}</td>
                     <td>{amount} kr</td>
                     <td>{description}</td>
-                    <td><a href="#" onClick={onRemove}>&times;</a></td>
+                    <td><a className="btn btn-default btn-xs" onClick={onRemove}>&times;</a></td>
                 </tr>
             );
         });
 
         return (
-            <table className="table table-striped table-condensed table-bordered">
-                <thead>
-                    <tr>
-                        <th>Namn</th>
-                        <th>Skuld</th>
-                        <th>Beskrivning</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {transactionList}
-                </tbody>
-            </table>
+            <div>
+                <h3>Transaktioner</h3>
+                <table className="table table-striped table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Namn</th>
+                            <th>Skuld</th>
+                            <th>Beskrivning</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {transactionList}
+                    </tbody>
+                </table>
+            </div>
         );
     }
 });

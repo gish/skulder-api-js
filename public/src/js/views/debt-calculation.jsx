@@ -38,19 +38,24 @@ module.exports = React.createClass({
             users = this.props.users,
             debt = this.getDebt(transactions),
             userName,
-            amount;
+            amount,
+            message;
 
         if (debt) {
             userName = _.find(users, function(user) {
                 return user.id === debt.userId;
             }).name;
             amount = debt.amount / 100;
+            message = userName + " är skyldig " + amount + " kr";
         } else {
-            return (<div>Det är lika!</div>);
+            message = "Det är lika!";
         }
 
         return (
-            <div>{userName} är skyldig {amount} kr</div>
+            <div>
+                <h3>Status</h3>
+                <p>{message}</p>
+            </div>
         );
     }
 });
