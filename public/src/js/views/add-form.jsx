@@ -93,24 +93,24 @@ module.exports = React.createClass({
                 </div>
                 <div className="form-group form-group-sm">
                     <div>
-                        <label>Andel</label>
+                        <label>är skyldig</label>
                         <div className="input-group">
-                            <input className="form-control" type="text" placeholder="50" value={fraction} onChange={this.onFractionChange} />
+                            <input className="form-control" type="tel" placeholder="50" value={fraction} onChange={this.onFractionChange} />
                             <span className="input-group-addon"> %</span>
                         </div>
                     </div>
                 </div>
                 <div className="form-group form-group-sm">
                     <div>
-                        <label>Skuld</label>
+                        <label>av</label>
                         <div className="input-group">
-                            <input className="form-control" type="text" placeholder="32" value={amount} onChange={this.onAmountChange} />
+                            <input className="form-control" type="tel" placeholder="32" value={amount} onChange={this.onAmountChange} />
                             <span className="input-group-addon"> kr</span>
                         </div>
                     </div>
                 </div>
                 <div className="form-group form-group-sm">
-                    <label>Vad som köptes</label>
+                    <label>för</label>
                     <input className="form-control" type="text" placeholder="En glass" value={description} onChange={this.onDescriptionChange} />
                 </div>
                 <button className="btn btn-primary pull-right" type="submit">Lägg till</button>
