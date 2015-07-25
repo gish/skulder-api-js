@@ -36,7 +36,7 @@ module.exports = React.createClass({
             transactions = this.state.transactions;
 
         return (
-            <div>
+            <div className="container">
                 <DebtCalculation users={users} transactions={transactions} />
                 <AddForm users={users} />
                 <TransactionList transactions={transactions} users={users} />
