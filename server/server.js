@@ -1,6 +1,7 @@
 var Hapi = require('hapi'),
     transactionRoutes = require('./../server/routes/transactions.js'),
     userRoutes = require('./../server/routes/users.js'),
+    publicRoutes = require('./../server/routes/public.js'),
     Transactions = require('./models/transactions.js'),
     Users = require('./models/users.js'),
     server = new Hapi.Server(),
@@ -16,6 +17,7 @@ module.exports = function() {
 
     transactionRoutes(server);
     userRoutes(server);
+    publicRoutes(server);
 
     return {
         start: function() {
