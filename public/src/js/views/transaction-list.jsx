@@ -23,6 +23,7 @@ module.exports = React.createClass({
                 description = t.description,
                 receiverName,
                 id = t.id,
+                date = (new Date(t.created_at * 1E3)).toLocaleDateString(),
                 onRemove = function() {
                     self.onRemove(id);
                 };
@@ -33,6 +34,7 @@ module.exports = React.createClass({
 
             return (
                 <tr key={id}>
+                    <td>{date}</td>
                     <td>{receiverName}</td>
                     <td>{amount} kr</td>
                     <td>{description}</td>
@@ -47,6 +49,7 @@ module.exports = React.createClass({
                 <table className="table table-striped table-condensed table-bordered">
                     <thead>
                         <tr>
+                            <th>Datum</th>
                             <th>Namn</th>
                             <th>Skuld</th>
                             <th>Beskrivning</th>
