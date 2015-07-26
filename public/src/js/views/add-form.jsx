@@ -105,7 +105,7 @@ module.exports = React.createClass({
                     <div>
                         <label>är skyldig</label>
                         <div className="input-group">
-                            <input className="form-control" type="tel" placeholder="50" value={fraction} onChange={this.onFractionChange} />
+                            <input className="form-control" type="tel" value={fraction} onChange={this.onFractionChange} />
                             <span className="input-group-addon"> %</span>
                         </div>
                     </div>
@@ -114,14 +114,14 @@ module.exports = React.createClass({
                     <div>
                         <label>av</label>
                         <div className="input-group">
-                            <input className="form-control" type="tel" placeholder="32" value={amount} onChange={this.onAmountChange} />
+                            <input className="form-control" type="tel" value={amount} onChange={this.onAmountChange} />
                             <span className="input-group-addon"> kr</span>
                         </div>
                     </div>
                 </div>
                 <div className="form-group form-group-sm">
                     <label>för</label>
-                    <input className="form-control" type="text" placeholder="En glass" value={description} onChange={this.onDescriptionChange} />
+                    <input className="form-control" type="text" value={description} onChange={this.onDescriptionChange} />
                 </div>
                 {submitButton}
             </form>
