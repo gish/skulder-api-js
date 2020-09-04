@@ -15,7 +15,7 @@
     "hapi": "^8.6.1",
     "lodash": "^3.9.3",
     "mysql": "^2.7.0",
-    "react": "^0.13.3",
+    "react": "^0.14.9",
     "reactify": "^1.1.1",
     "reflux": "^0.2.9",
     "run-sequence": "^1.1.1",
